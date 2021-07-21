@@ -33,6 +33,10 @@
     "ethereum"
   ],
   "author": "Chiaki.C",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/portto/blocto-connector.git"
+  },
   "dependencies": {
     "@blocto/sdk": "^0.1.4",
     "@web3-react/abstract-connector": "^6.0.7",
