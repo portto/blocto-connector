@@ -12,7 +12,7 @@ const chainIdToNetwork: { [network: number]: string } = {
   1: 'mainnet',
   3: 'ropsten',
   4: 'rinkeby',
-  42: 'kovan'
+  42: 'kovan',
 }
 
 export class BloctoConnector extends AbstractConnector {
@@ -29,15 +29,18 @@ export class BloctoConnector extends AbstractConnector {
 
   public async activate(): Promise<ConnectorUpdate> {
     const bloctoProvider = new BloctoProvider({
-      chainId: this.chainId,
-      rpc: this.rpc
+      ethereum: { chainId: this.chainId, rpc: this.rpc },
     })
 
-    this.Blocto = bloctoProvider
+    this.Blocto = bloctoProvider.ethereum
 
-    const [account] = await bloctoProvider.enable();
+    const [account] = await bloctoProvider.enable()
 
-    return { provider: bloctoProvider, chainId: this.chainId, account: account }
+    return {
+      provider: this.Blocto,
+      chainId: this.chainId,
+      account: account,
+    }
   }
 
   public async getProvider(): Promise<any> {
@@ -49,9 +52,7 @@ export class BloctoConnector extends AbstractConnector {
   }
 
   public async getAccount(): Promise<null | string> {
-    return this.Blocto
-      .request({ method: 'eth_accounts' })
-      .then((accounts: string[]): string => accounts[0])
+    return this.Blocto.request({ method: 'eth_accounts' }).then((accounts: string[]): string => accounts[0])
   }
 
   public deactivate() {}
