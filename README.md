@@ -10,10 +10,6 @@ Blocto SDK connector for web3-react
 yarn
 ```
 
-```bash
-yarn global tsdx
-```
-
 ### Build
 
 ```bash
