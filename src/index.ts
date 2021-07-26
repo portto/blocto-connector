@@ -35,13 +35,13 @@ export class BloctoConnector extends AbstractConnector {
 
     this.Blocto = bloctoProvider
 
-    const [account] = await Promise.all([bloctoProvider.enable().then((accounts: string[]) => accounts[0])])
+    const [account] = await bloctoProvider.enable();
 
     return { provider: bloctoProvider, chainId: this.chainId, account: account }
   }
 
   public async getProvider(): Promise<any> {
-    return this.Blocto.getProvider()
+    return this.Blocto
   }
 
   public async getChainId(): Promise<number | string> {
@@ -49,8 +49,8 @@ export class BloctoConnector extends AbstractConnector {
   }
 
   public async getAccount(): Promise<null | string> {
-    return this.Blocto.getProvider()
-      .send('eth_accounts')
+    return this.Blocto
+      .request({ method: 'eth_accounts' })
       .then((accounts: string[]): string => accounts[0])
   }
 
