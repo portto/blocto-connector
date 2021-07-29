@@ -13,6 +13,8 @@ const chainIdToNetwork: { [network: number]: string } = {
   3: 'ropsten',
   4: 'rinkeby',
   42: 'kovan',
+  56: 'bsc', // BSC Mainnet
+  97: 'chapel', // BSC Testnet
 }
 
 export class BloctoConnector extends AbstractConnector {
@@ -55,5 +57,5 @@ export class BloctoConnector extends AbstractConnector {
     return this.Blocto.request({ method: 'eth_accounts' }).then((accounts: string[]): string => accounts[0])
   }
 
-  public deactivate() {}
+  public deactivate() { }
 }
