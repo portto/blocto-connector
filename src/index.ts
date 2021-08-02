@@ -20,7 +20,7 @@ const chainIdToNetwork: { [network: number]: string } = {
 export class BloctoConnector extends AbstractConnector {
   private readonly chainId: number
   private readonly rpc: string
-  public Blocto: any
+  public blocto: any
 
   constructor({ chainId, rpc }: BloctoConnectorArguments) {
     invariant(Object.keys(chainIdToNetwork).includes(chainId.toString()), `Unsupported chainId ${chainId}`)
@@ -34,19 +34,19 @@ export class BloctoConnector extends AbstractConnector {
       ethereum: { chainId: this.chainId, rpc: this.rpc },
     })
 
-    this.Blocto = bloctoProvider.ethereum
+    this.blocto = bloctoProvider.ethereum
 
-    const [account] = await bloctoProvider.enable()
+    const [account] = await this.blocto.enable()
 
     return {
-      provider: this.Blocto,
+      provider: this.blocto,
       chainId: this.chainId,
       account: account,
     }
   }
 
   public async getProvider(): Promise<any> {
-    return this.Blocto
+    return this.blocto
   }
 
   public async getChainId(): Promise<number | string> {
@@ -54,7 +54,7 @@ export class BloctoConnector extends AbstractConnector {
   }
 
   public async getAccount(): Promise<null | string> {
-    return this.Blocto.request({ method: 'eth_accounts' }).then((accounts: string[]): string => accounts[0])
+    return this.blocto.request({ method: 'eth_accounts' }).then((accounts: string[]): string => accounts[0])
   }
 
   public deactivate() { }
