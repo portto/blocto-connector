@@ -15,6 +15,10 @@ const chainIdToNetwork: { [network: number]: string } = {
   42: 'kovan',
   56: 'bsc', // BSC Mainnet
   97: 'chapel', // BSC Testnet
+  137: 'polygon', // Polygon Mainnet
+  80001: 'mumbai', // Polygon Testnet
+  43114: 'avalanche', // Avalanche Mainnet
+  43113: 'fuji', // Avalanche Testnet
 }
 
 export class BloctoConnector extends AbstractConnector {
