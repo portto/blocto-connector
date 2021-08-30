@@ -1,7 +1,7 @@
 import { ConnectorUpdate } from '@web3-react/types'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import invariant from 'tiny-invariant'
-import BloctoProvider from '@blocto/sdk'
+import BloctoSDK from '@blocto/sdk'
 
 interface BloctoConnectorArguments {
   chainId: number
@@ -34,6 +34,7 @@ export class BloctoConnector extends AbstractConnector {
   }
 
   public async activate(): Promise<ConnectorUpdate> {
+<<<<<<< HEAD
     const bloctoProvider = new BloctoProvider({
       ethereum: { chainId: this.chainId, rpc: this.rpc },
     })
@@ -47,6 +48,20 @@ export class BloctoConnector extends AbstractConnector {
       chainId: this.chainId,
       account: account,
     }
+=======
+    const bloctoSDK = new BloctoSDK({
+      ethereum: {
+        chainId: this.chainId,
+        rpc: this.rpc
+      }
+    })
+
+    this.Blocto = bloctoSDK.ethereum
+
+    const [account] = await this.Blocto.enable();
+
+    return { provider: this.Blocto, chainId: this.chainId, account: account }
+>>>>>>> Update dependency
   }
 
   public async getProvider(): Promise<any> {
