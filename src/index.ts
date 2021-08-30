@@ -34,21 +34,6 @@ export class BloctoConnector extends AbstractConnector {
   }
 
   public async activate(): Promise<ConnectorUpdate> {
-<<<<<<< HEAD
-    const bloctoProvider = new BloctoProvider({
-      ethereum: { chainId: this.chainId, rpc: this.rpc },
-    })
-
-    this.blocto = bloctoProvider.ethereum
-
-    const [account] = await this.blocto.enable()
-
-    return {
-      provider: this.blocto,
-      chainId: this.chainId,
-      account: account,
-    }
-=======
     const bloctoSDK = new BloctoSDK({
       ethereum: {
         chainId: this.chainId,
@@ -56,12 +41,11 @@ export class BloctoConnector extends AbstractConnector {
       }
     })
 
-    this.Blocto = bloctoSDK.ethereum
+    this.blocto = bloctoSDK.ethereum
 
-    const [account] = await this.Blocto.enable();
+    const [account] = await this.blocto.enable();
 
-    return { provider: this.Blocto, chainId: this.chainId, account: account }
->>>>>>> Update dependency
+    return { provider: this.blocto, chainId: this.chainId, account: account }
   }
 
   public async getProvider(): Promise<any> {
